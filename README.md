@@ -18,6 +18,30 @@ On Windows:(name of your virtualenv)\Scripts\activate
 On macOS/Linux: source (name of your virtualenv)/bin/activate
 Note: when using gitbash, this command works: source (name of your virtualenv)\Scripts\activate
 
+Ensure that MySQL is installed and running on your machine. You also need the Python MySQL client library to allow Django to connect to MySQL
+Install mysql client via pip using the command: pip install mysqlclient
+
+Configure your database settings in your settings.py file and the database setting should be configured for MySQL. Update it  as follows:
+DATABASES = {
+    'default': {
+        'ENGINE': 'django.db.backends.mysql',
+        'NAME': 'your_database_name',
+        'USER': 'your_mysql_user',
+        'PASSWORD': 'your_mysql_password',
+        'HOST': 'localhost',  # Or your MySQL server's IP
+        'PORT': '3306',  # Default MySQL port
+    }
+}
+Replace 'your_database_name', 'your_mysql_user', and 'your_mysql_password' with the actual database name and credentials.
+
+Create your database in MySQL before making migrations using the following commands:
+mysql -u your_mysql_user -p
+CREATE DATABASE your_database_name;
+
+Remember to use your own credentials in ‘your_mysql_user’ and your password in -p and your own database name in ‘ your_database_name’
+Now, you can run the python manage.py migrate command. This will apply all the migrations and set up the database schema in MySQL.
+Use the command: python manage.py migrate
+
 Make sure django is installed. Check with: python -m django --version / django-admin --version
 If not installed, then use the command: pip install django / python -m pip install django
 
